@@ -17,7 +17,7 @@ const io = new Server(server, {
 app.use(cors()); 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/timer');
+mongoose.connect('mongodb+srv://ayeshashaikh:YyhIlw1Sh0ESn8rJ@cluster0.pfqzc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 
 // Timer schema
 const timerSchema = new mongoose.Schema({
