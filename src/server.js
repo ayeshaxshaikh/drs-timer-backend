@@ -4,6 +4,10 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from 'dotenv';
+dotenv.config(); 
+
+const MONGODB_URL = process.env.MONGODB_URI;
 
 const app = express();
 const server = createServer(app);
@@ -17,7 +21,12 @@ const io = new Server(server, {
 app.use(cors()); 
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://ayeshashaikh:YyhIlw1Sh0ESn8rJ@cluster0.pfqzc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect(MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Connected to MongoDB'))
+  .catch((error) => console.error('Error connecting to MongoDB:', error));
 
 // Timer schema
 const timerSchema = new mongoose.Schema({
